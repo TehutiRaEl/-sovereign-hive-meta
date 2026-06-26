@@ -4,7 +4,7 @@
 
 queen:
   repo: TehutiRaEl/-sovereign-hive-meta
-  soul_md_hash: ""   # updated automatically by constitution-sync workflow
+  soul_md_hash: "afdfb3b4d53b93b9eb3a30a83b00a5f6069f59bc97e1091e46bbe494aca7adb7"
 
 colonies:
   - name: THEHIVE
