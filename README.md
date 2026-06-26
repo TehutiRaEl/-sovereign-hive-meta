@@ -74,6 +74,16 @@ GET  /colony/health    — liveness + uptime
 GET  /colony/agents    — registered agent list
 POST /colony/events    — ingest a hive event
 GET  /colony/manifest  — full manifest including endpoint map
-```
+```Secrets you need to set — complete map
+-sovereign-hive-meta → Settings → Secrets and variables → Actions
+Secret	Status	Value
+COLONY_DISPATCH_TOKEN	✅ already added	PAT with repo scope
+THEHIVE_URL	add when deployed	e.g. https://thehive.yourdomain.com
+AETHER_URL	add when deployed	e.g. https://aether.vercel.app
+AUTOMATISCH_COLONY_URL	add when deployed	the colony sidecar base URL (port 3030), e.g. http://automatisch.yourdomain.com:3030 — NOT the main app port
+KIMI_COLONY_URL	add when deployed	the colony server base URL (port 3333), e.g. http://kimi.yourdomain.com:3333
+LOCALAGI_URL	add when deployed	e.g. http://localagi.yourdomain.com
+NAR2_URL	add when deployed	e.g. http://nar2.yourdomain.com
+FOURBRAIN_URL	add when deployed	e.g. http://4dbrain.yourdomain.com
 
 (aether uses `/api/colony/*` prefix due to Next.js App Router conventions)
