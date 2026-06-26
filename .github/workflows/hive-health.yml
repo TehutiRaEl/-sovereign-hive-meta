@@ -1,0 +1,79 @@
+name: Hive Health Monitor
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  health:
+    name: Poll colony health endpoints
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Poll THEHIVE
+        continue-on-error: true
+        env:
+          THEHIVE_URL: ${{ secrets.THEHIVE_URL }}
+        run: |
+          url="${THEHIVE_URL:-}/colony/health"
+          status=$(curl -sf --max-time 10 "$url" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('status','unknown'))" 2>/dev/null || echo "unreachable")
+          echo "THEHIVE_STATUS=$status" >> $GITHUB_ENV
+
+      - name: Poll aether
+        continue-on-error: true
+        env:
+          AETHER_URL: ${{ secrets.AETHER_URL }}
+        run: |
+          url="${AETHER_URL:-}/api/colony/health"
+          status=$(curl -sf --max-time 10 "$url" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('status','unknown'))" 2>/dev/null || echo "unreachable")
+          echo "AETHER_STATUS=$status" >> $GITHUB_ENV
+
+      - name: Poll automatisch colony sidecar
+        continue-on-error: true
+        env:
+          AUTOMATISCH_COLONY_URL: ${{ secrets.AUTOMATISCH_COLONY_URL }}
+        run: |
+          url="${AUTOMATISCH_COLONY_URL:-}/colony/health"
+          status=$(curl -sf --max-time 10 "$url" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('status','unknown'))" 2>/dev/null || echo "unreachable")
+          echo "AUTOMATISCH_STATUS=$status" >> $GITHUB_ENV
+
+      - name: Poll kimi-k2 colony server
+        continue-on-error: true
+        env:
+          KIMI_COLONY_URL: ${{ secrets.KIMI_COLONY_URL }}
+        run: |
+          url="${KIMI_COLONY_URL:-}/colony/health"
+          status=$(curl -sf --max-time 10 "$url" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('status','unknown'))" 2>/dev/null || echo "unreachable")
+          echo "KIMI_STATUS=$status" >> $GITHUB_ENV
+
+      - name: Poll NAR2
+        continue-on-error: true
+        env:
+          NAR2_URL: ${{ secrets.NAR2_URL }}
+        run: |
+          url="${NAR2_URL:-}/colony/health"
+          status=$(curl -sf --max-time 10 "$url" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('status','unknown'))" 2>/dev/null || echo "unreachable")
+          echo "NAR2_STATUS=$status" >> $GITHUB_ENV
+
+      - name: Poll 4DBRAIN
+        continue-on-error: true
+        env:
+          FOURBRAIN_URL: ${{ secrets.FOURBRAIN_URL }}
+        run: |
+          url="${FOURBRAIN_URL:-}/colony/health"
+          status=$(curl -sf --max-time 10 "$url" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('status','unknown'))" 2>/dev/null || echo "unreachable")
+          echo "FOURBRAIN_STATUS=$status" >> $GITHUB_ENV
+
+      - name: Summary
+        run: |
+          echo "## Hive Health — $(date -u)" >> $GITHUB_STEP_SUMMARY
+          echo "| Colony | Role | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| THEHIVE | core | ${THEHIVE_STATUS:-unknown} |" >> $GITHUB_STEP_SUMMARY
+          echo "| aether | revenue | ${AETHER_STATUS:-unknown} |" >> $GITHUB_STEP_SUMMARY
+          echo "| automatisch | automation | ${AUTOMATISCH_STATUS:-unknown} |" >> $GITHUB_STEP_SUMMARY
+          echo "| kimi-k2 | llm-gateway | ${KIMI_STATUS:-unknown} |" >> $GITHUB_STEP_SUMMARY
+          echo "| NAR2 | outer-colony | ${NAR2_STATUS:-unknown} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 4DBRAIN | outer-colony | ${FOURBRAIN_STATUS:-unknown} |" >> $GITHUB_STEP_SUMMARY
