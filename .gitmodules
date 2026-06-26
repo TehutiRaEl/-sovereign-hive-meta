@@ -1,0 +1,44 @@
+[submodule "colonies/THEHIVE"]
+	path = colonies/THEHIVE
+	url = https://github.com/TehutiRaEl/THEHIVE.git
+	branch = main
+
+[submodule "colonies/aether"]
+	path = colonies/aether
+	url = https://github.com/TehutiRaEl/aether.git
+	branch = main
+
+[submodule "colonies/automatisch"]
+	path = colonies/automatisch
+	url = https://github.com/TehutiRaEl/automatisch.git
+	branch = main
+
+[submodule "colonies/kimi-k2"]
+	path = colonies/kimi-k2
+	url = https://github.com/TehutiRaEl/Kimi-K2.git
+	branch = main
+
+[submodule "colonies/localagi"]
+	path = colonies/localagi
+	url = https://github.com/TehutiRaEl/LocalAGI.git
+	branch = main
+
+[submodule "colonies/free-programming-books"]
+	path = colonies/free-programming-books
+	url = https://github.com/TehutiRaEl/free-programming-books.git
+	branch = main
+
+[submodule "colonies/freeCodeCamp"]
+	path = colonies/freeCodeCamp
+	url = https://github.com/TehutiRaEl/freeCodeCamp.git
+	branch = main
+
+[submodule "colonies/nar2"]
+	path = colonies/nar2
+	url = https://github.com/TehutiRaEl/NAR2.git
+	branch = main
+
+[submodule "colonies/4dbrain"]
+	path = colonies/4dbrain
+	url = https://github.com/TehutiRaEl/4DBRAIN.git
+	branch = main
