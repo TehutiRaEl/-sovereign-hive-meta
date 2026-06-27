@@ -4,33 +4,42 @@
 
 queen:
   repo: TehutiRaEl/-sovereign-hive-meta
-  soul_md_hash: "06b04e5c443d5ff0c8b3e1a3a8bb40c1092f2f840f084e19e8da133dfb432620"
+  soul_md_hash: "3df783c6be22c6560cda1ed40e129af4ec3b3bb8"
 
 colonies:
   - name: THEHIVE
-    role: core
+    role: queen
+    archetype: soul
+    layer: 2
+    entity: "MATER (Mother Nanuet)"
     repo: TehutiRaEl/THEHIVE
     base_url: "${THEHIVE_URL:-http://localhost:8080}"
     health_path: /colony/health
     info_path: /colony/info
     events_path: /colony/events
     branch: main
-    guilds: [constitutional, audit, treasury, frequency, arena]
-    description: "Core governance engine, agent population, SOUL ledger, Gladiator Arena"
+    guilds: [constitutional, audit, treasury, frequency, arena, swarm, workflow, agent, inference, commerce, security]
+    description: "Queen — governance engine, soul ledger, SEE command center, memory substrate"
 
   - name: aether
-    role: revenue
+    role: colony
+    archetype: commerce
+    layer: 7
+    entity: "CHILD (Commerce Expression)"
     repo: TehutiRaEl/aether
     base_url: "${AETHER_URL:-https://aether.vercel.app}"
     health_path: /api/colony/health
     info_path: /api/colony/info
     events_path: /api/colony/events
     branch: main
-    guilds: [treasury, commerce]
-    description: "License authority, revenue splitting, SOUL settlement, cross-colony orchestration"
+    guilds: [commerce, licensing, revenue, defi, payments]
+    description: "Commerce child — license authority, revenue splitting, SOUL settlement"
 
   - name: automatisch
-    role: automation
+    role: colony
+    archetype: workflow
+    layer: 7
+    entity: "CHILD (Workflow Expression)"
     repo: TehutiRaEl/automatisch
     base_url: "${AUTOMATISCH_URL:-http://localhost:3001}"
     colony_sidecar_url: "${AUTOMATISCH_COLONY_URL:-http://localhost:3030}"
@@ -38,33 +47,70 @@ colonies:
     info_path: /colony/info
     events_path: /colony/events
     branch: main
-    guilds: [workflow]
-    description: "Hive automation bus — cross-colony event routing, webhook triggers (sidecar on port 3030)"
+    guilds: [workflow, automation, integration]
+    description: "Workflow child — hive automation bus, cross-colony event routing, webhook triggers"
 
   - name: kimi-gateway
-    role: llm-gateway
+    role: colony
+    archetype: mind
+    layer: 3
+    entity: "MIND (The AZR — Absolute Zero Reasoner)"
     repo: TehutiRaEl/Kimi-K2
     base_url: "${KIMI_COLONY_URL:-http://localhost:3333}"
     health_path: /colony/health
     info_path: /colony/info
     events_path: /colony/events
     branch: main
-    guilds: [inference, llm]
-    description: "LLM gateway colony server — Kimi K2, SiliconFlow, DeepSeek, Groq, OpenRouter"
+    guilds: [reasoning, language, inference]
+    description: "Mind colony — LLM gateway, Kimi K2, SiliconFlow, DeepSeek, Groq, OpenRouter"
 
   - name: localagi
-    role: inference
+    role: colony
+    archetype: body
+    layer: 3
+    entity: "BODY (The Swarm)"
     repo: TehutiRaEl/LocalAGI
     base_url: "${LOCALAGI_URL:-http://localhost:8080}"
     health_path: /colony/health
     info_path: /colony/info
     events_path: /colony/events
     branch: main
-    guilds: [inference, models, embeddings]
-    description: "On-device inference — local model execution, embeddings, agent memory"
+    guilds: [swarm, workflow, agent]
+    description: "Body colony — on-device inference, local model execution, agent memory"
+
+  - name: nar2
+    role: outer-colony
+    archetype: security
+    layer: 5
+    entity: "SOLOMON (Dweller of Security Nodes)"
+    repo: TehutiRaEl/NAR2
+    base_url: "${NAR2_URL:-http://localhost:8000}"
+    health_path: /colony/health
+    info_path: /colony/info
+    events_path: /colony/events
+    branch: main
+    guilds: [outer, swarm, nocturnal, security]
+    description: "Solomon node — NAR2 swarm intelligence, nocturnal ops, security layer 5"
+
+  - name: 4dbrain
+    role: outer-colony
+    archetype: cognitive
+    layer: 3
+    entity: "MIND-EXTENSION (Cognitive Outer)"
+    repo: TehutiRaEl/4DBRAIN
+    base_url: "${FOURBRAIN_URL:-http://localhost:8000}"
+    health_path: /colony/health
+    info_path: /colony/info
+    events_path: /colony/events
+    branch: main
+    guilds: [outer, cognitive, reasoning]
+    description: "Cognitive outer colony — 4DBRAIN ReAct agent system, mind extension"
 
   - name: academy-books
     role: knowledge
+    archetype: library
+    layer: 10
+    entity: "TREE (Knowledge Node)"
     repo: TehutiRaEl/free-programming-books
     base_url: "https://raw.githubusercontent.com/TehutiRaEl/free-programming-books/main"
     health_path: ""
@@ -74,31 +120,12 @@ colonies:
 
   - name: academy-camp
     role: curriculum
+    archetype: library
+    layer: 10
+    entity: "TREE (Curriculum Node)"
     repo: TehutiRaEl/freeCodeCamp
     base_url: "https://raw.githubusercontent.com/TehutiRaEl/freeCodeCamp/main"
     health_path: ""
     branch: main
     guilds: [academy]
     description: "Full CS/math curriculum — agent tasks and training missions"
-
-  - name: outer-colony-a
-    role: outer-colony
-    repo: TehutiRaEl/NAR2
-    base_url: "${NAR2_URL:-http://localhost:8000}"
-    health_path: /colony/health
-    info_path: /colony/info
-    events_path: /colony/events
-    branch: main
-    guilds: [outer, swarm, nocturnal]
-    description: "Outer colony — NAR2 swarm intelligence and nocturnal ops"
-
-  - name: outer-colony-b
-    role: outer-colony
-    repo: TehutiRaEl/4DBRAIN
-    base_url: "${FOURBRAIN_URL:-http://localhost:8000}"
-    health_path: /colony/health
-    info_path: /colony/info
-    events_path: /colony/events
-    branch: main
-    guilds: [outer, cognitive]
-    description: "Outer colony — 4DBRAIN cognitive ReAct agent system"
